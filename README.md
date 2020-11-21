@@ -42,6 +42,8 @@ And once inside the console:
 
 1. Run your test files
 
+Testing will not migrate your smart contracts but will still create transactions on your development blockchain.
+
 `truffle test`
 
 ## Troubleshooting
