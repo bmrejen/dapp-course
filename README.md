@@ -1,70 +1,96 @@
-# Getting Started with Create React App
+# Dapp Course
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Installation (Windows instructions)
 
-In the project directory, you can run:
+Uninstall other versions of Truffle
+`npm i -g node-gyp@3.6.2 create-react-app@2.1.3 truffle@5.0.5`
 
-### `npm start`
+Install Python2.7
+`choco install python2`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Usage
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. For development mode, launch Ganache and report your local IP and port to `truffle-config.js`
 
-### `npm test`
+2. Install dependencies
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`npm i`
 
-### `npm run build`
+3. Compile your smart contracts to src/abis
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`truffle compile`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Deploy them to the blockchain. Migration files will be run alphabetically
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`truffle migrate`
 
-### `npm run eject`
+5. Check the result and the address of the account that was charged (usually the first one in Ganache)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+`truffle console`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+And once inside the console:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`const token = await Token.deployed();`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+`token.address`
 
-## Learn More
+`token.name`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Testing 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Run your test files
 
-### Code Splitting
+`truffle test`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Troubleshooting
 
-### Analyzing the Bundle Size
+If the project doesn't work:
+1. Only keep Python2.7 and remove other versions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+`choco uninstall python`
 
-### Making a Progressive Web App
+`choco uninstall python3`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Run appwiz.cpl and uninstall Python versions.
 
-### Advanced Configuration
+You might need to manually delete executable files 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+2. Remove other versions of NodeJS. Only keep 9.10.0
 
-### Deployment
+`nvm list`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+`nvm uninstall`
 
-### `npm run build` fails to minify
+3. Install build tools
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+You can either do
+
+`npm install --global --production windows-build-tools`
+
+or follow instructions here: https://www.npmjs.com/package/node-gyp/v/3.6.2
+
+4. Set MSVS version and Python version
+
+`npm config set msvs_version 2015`
+
+`npm config set python "C:\Python27"`
+
+5. Create empty binding.cc at root
+
+6. Create binding.gyp at root
+
+```
+{
+    "targets": [
+    {
+      "target_name": "binding",
+      "sources": [ "src/binding.cc" ]
+    }
+  ]
+}
+```
+
+7. Check your Windows environment variables for Python27
+
