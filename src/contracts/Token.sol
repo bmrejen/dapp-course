@@ -22,8 +22,6 @@ contract Token {
     }
 
     function transfer(address _to, uint256 _value) public returns (bool success){
-        require(_to != address(0x0));
-        require(balanceOf[msg.sender] >= _value);
         _transfer(msg.sender, _to, _value);
         return true;
     }
@@ -38,6 +36,7 @@ contract Token {
     function _transfer(address _from, address _to, uint256 _value) internal {
         require (_from != address(0));
         require (_to != address(0));
+        require(balanceOf[_from] >= _value);
         balanceOf[_from] = balanceOf[_from].sub(_value);
         balanceOf[_to] = balanceOf[_to].add(_value);
         emit Transfer(_from, _to, _value);

@@ -129,6 +129,16 @@ contract("Token", (accounts) => {
     });
   });
 
+  // describe("rejects non-approved transfer", () => {
+  //   it("rejects non-approved transfer", async () => {
+  //     let result = await token.transferFrom(deployer, receiver, tokens(10), {
+  //       from: exchange,
+  //     });
+  //     console.log(result);
+  //     // .should.be.rejected;
+  //   });
+  // });
+
   describe("delegated token transfer", async () => {
     let amount, result;
 
