@@ -38,7 +38,14 @@ And once inside the console:
 
 `token.name`
 
-## Testing 
+## Testing
+
+0. Setting MetaMask as a provider
+
+If you are using Ganache for your local blockchain, go to MetaMask -> Settings -> choose `localhost:7545` for your network.
+
+_Importing a Ganache account into MetaMask_
+Choose an account in Ganache, copy its Private Key and paste it in MetaMask -> Import -> Private Key
 
 1. Run your test files
 
@@ -46,9 +53,19 @@ Testing will not migrate your smart contracts but will still create transactions
 
 `truffle test`
 
+2. Always re-run your migrations if you must your local blockchain and seed some data
+
+`truffle migrate --reset`
+`truffle exec scripts/seed-exchange.js`
+
+3. Run your local webserver
+
+`npm run start`
+
 ## Troubleshooting
 
 If the project doesn't work:
+
 1. Only keep Python2.7 and remove other versions
 
 `choco uninstall python`
@@ -57,7 +74,7 @@ If the project doesn't work:
 
 Run appwiz.cpl and uninstall Python versions.
 
-You might need to manually delete executable files 
+You might need to manually delete executable files
 
 2. Remove other versions of NodeJS. Only keep 9.10.0
 
@@ -95,4 +112,3 @@ or follow instructions here: https://www.npmjs.com/package/node-gyp/v/3.6.2
 ```
 
 7. Check your Windows environment variables for Python27
-

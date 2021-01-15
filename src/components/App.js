@@ -23,6 +23,7 @@ class App extends Component {
     );
     console.log("token", token);
 
+    // call() = read, send() = write
     const totalSupply = await token.methods.totalSupply().call();
     console.log(totalSupply);
   }
