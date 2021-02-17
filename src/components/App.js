@@ -4,7 +4,7 @@ import Web3 from "web3";
 import Token from "../abis/Token.json";
 
 class App extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.loadBlockchainData();
   }
 
@@ -17,7 +17,7 @@ class App extends Component {
     const accounts = await web3.eth.getAccounts();
     console.log("accounts: ", accounts);
 
-    const token = new web3.eth.Contract(
+    const token = new web3.eth.Contract( // from the json file in abis
       Token.abi,
       Token.networks[networkId].address
     );

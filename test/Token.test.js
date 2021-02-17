@@ -15,25 +15,23 @@ contract("Token", (accounts) => {
     token = await Token.new();
   });
 
-  describe("deployment", () => {
+  describe("deployment", async () => {
     it("tracks the name", async () => {
-      const result = await token.name();
-      result.should.equal("BMR Token");
+      shouldEqual(await token.name(), "BMR Token");
     });
 
     it("tracks the symbol", async () => {
-      const result = await token.symbol();
-      result.should.equal("BMR");
+      shouldEqual(await token.symbol(), "BMR");
     });
 
     it("tracks the decimals", async () => {
-      const result = await token.decimals();
-      result.toString().should.equal("18");
+      const decimals = await token.decimals();
+      shouldEqual(decimals.toString(), "18");
     });
 
     it("tracks the total supply", async () => {
-      const result = await token.totalSupply();
-      result.toString().should.equal(tokens(1000000).toString());
+      const totalSupply = await token.totalSupply();
+      shouldEqual(totalSupply.toString(), tokens(1000000).toString());
     });
 
     it("deployer has all supply", async () => {
@@ -94,6 +92,12 @@ contract("Token", (accounts) => {
           .transfer(receiver, invalidAmount, { from: deployer })
           .should.be.rejectedWith(EVM_REVERT);
       });
+
+      it("rejects non-approved transfer", async () => {
+        await token.transferFrom(deployer, receiver, tokens(10), {
+          from: exchange,
+        }).should.be.rejected;
+      });
     });
   });
 
@@ -128,16 +132,6 @@ contract("Token", (accounts) => {
       });
     });
   });
-
-  // describe("rejects non-approved transfer", () => {
-  //   it("rejects non-approved transfer", async () => {
-  //     let result = await token.transferFrom(deployer, receiver, tokens(10), {
-  //       from: exchange,
-  //     });
-  //     console.log(result);
-  //     // .should.be.rejected;
-  //   });
-  // });
 
   describe("delegated token transfer", async () => {
     let amount, result;
@@ -193,3 +187,7 @@ contract("Token", (accounts) => {
     });
   });
 });
+
+function shouldEqual(property, expectedResult) {
+  property.should.equal(expectedResult);
+}
