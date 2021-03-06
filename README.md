@@ -12,6 +12,10 @@ Install Python2.7
 
 ## Usage
 
+0. Use Node 9.10.0
+
+`nvm use 9.10.0`
+
 1. For development mode, launch Ganache and report your local IP and port to `truffle-config.js`
 
 2. Install dependencies

@@ -1,4 +1,5 @@
 pragma solidity ^0.5.0;
+
 import "./Token.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
@@ -12,7 +13,7 @@ contract Exchange {
   uint256 public feePercent;
 
   // the list of people and their balance
-  // tokens[Ben] == 10 ETH
+  // tokens[Ben][Bob] == 10 ETH
   mapping(address => mapping (address => uint256)) public tokens;
 
   // Store the order

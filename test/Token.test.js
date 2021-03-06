@@ -17,21 +17,23 @@ contract("Token", (accounts) => {
 
   describe("deployment", async () => {
     it("tracks the name", async () => {
-      shouldEqual(await token.name(), "BMR Token");
+      const res = await token.name();
+      res.should.eq("BMR Token");
     });
 
     it("tracks the symbol", async () => {
-      shouldEqual(await token.symbol(), "BMR");
+      const res = await token.symbol();
+      res.should.eq("BMR");
     });
 
     it("tracks the decimals", async () => {
       const decimals = await token.decimals();
-      shouldEqual(decimals.toString(), "18");
+      decimals.toString().should.eq("18");
     });
 
     it("tracks the total supply", async () => {
       const totalSupply = await token.totalSupply();
-      shouldEqual(totalSupply.toString(), tokens(1000000).toString());
+      totalSupply.toString().should.eq(tokens(1000000).toString());
     });
 
     it("deployer has all supply", async () => {
@@ -187,7 +189,3 @@ contract("Token", (accounts) => {
     });
   });
 });
-
-function shouldEqual(property, expectedResult) {
-  property.should.equal(expectedResult);
-}
