@@ -12,7 +12,7 @@ export default function configureStore(preloadedState) {
   let store = createStore(
     rootReducer,
     preloadedState,
-    applyMiddleware(...middleware, loggerMiddleware)
+    composeEnhancers(applyMiddleware(...middleware, loggerMiddleware))
   );
 
   return store;

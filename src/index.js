@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { render } from "react-dom";
 import { Provider } from "react-redux";
 import "bootstrap/dist/css/bootstrap.css";
 import App from "./components/App";
@@ -9,11 +8,9 @@ import configureStore from "./store/configureStore";
 
 // The Provider attaches the store to the app. So wrap the App inside the Provider component
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={configureStore()}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={configureStore()}>
+    <App />
+  </Provider>,
   document.getElementById("root")
 );
 
